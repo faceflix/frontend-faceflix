@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Center,
-  FormControl,
-  Stack,
-  Input,
-  Button,
-  Text,
-} from "@chakra-ui/react";
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+import Form from "./Form";
 const FormRegister = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
@@ -49,59 +42,29 @@ const FormRegister = () => {
   };
 
   return (
-    <>
-      <Box>
-        <Center>
-          {error ? (
-            <Text fontSize={"12px"} color={"red.500"}>
-              {error}
-            </Text>
-          ) : null}
-        </Center>
-        <Form onSubmit={(e) => handleSubmit(e)}>
-          <FormControl>
-            <Stack spacing={3}>
-              <Input
-                rounded={10}
-                bg={"#ffeed9"}
-                name="email"
-                value={email}
-                placeholder="Masukkan email"
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Input
-                rounded={10}
-                bg={"#ffeed9"}
-                name="password"
-                value={password}
-                type="password"
-                placeholder="Masukkan Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <Button
-                type="submit"
-                bg={"#87c4ff"}
-                _hover={{ background: "#39a6ffa9" }}
-                w={"100%"}
-              >
-                Create
-              </Button>
-            </Stack>
-          </FormControl>
-        </Form>
-      </Box>
-    </>
-  );
-};
-
-const Form = ({ children, action, method, onSubmit }) => {
-  return (
-    <form action={action} method={method} onSubmit={onSubmit}>
-      <div> </div>
-
-      {children}
-    </form>
+    <div>
+      <div className="text-center">
+        {error ? <p className="text-[13px] text-red-500">{error}</p> : null}
+      </div>
+      <Form onSubmit={(e) => handleSubmit(e)} className={"flex flex-col gap-2"}>
+        <input
+          className="rounded-md bg-[#ffeed9] h-10 px-5"
+          name="email"
+          value={email}
+          placeholder="Masukkan email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          className="rounded-md bg-[#ffeed9] h-10 px-5"
+          name="password"
+          value={password}
+          type="password"
+          placeholder="Masukkan Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form>
+    </div>
   );
 };
 
