@@ -21,7 +21,10 @@ const AuthLayouts = ({ children, title }) => {
         </div>
       </div>
       <h2 className=" w-full flex justify-center py-2 items-center mx-auto mt-5 font-semibold gap-2  border border-opacity-0 hover:border-opacity-100  border-black cursor-pointer ">
-        <img className="w-[20px] h-full " src="iconFacebook.png" />
+        <img
+          className="w-[20px] h-full "
+          src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+        />
         Continue With Google
       </h2>
       <div className="flex justify-center items-center text-[12px] mt-3 gap-1">

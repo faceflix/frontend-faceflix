@@ -32,8 +32,8 @@ const FormLogin = () => {
         throw data.errors;
       }
 
-      setIsLogin(data);
       localStorage.setItem("token", data.data.token);
+      navigate("/");
     } catch (error) {
       setError(error);
     } finally {
@@ -44,9 +44,9 @@ const FormLogin = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      setError("User Sudah Login");
+      navigate("/");
     }
-  }, []);
+  }, [navigate]);
   return (
     <div>
       <div className="text-center">

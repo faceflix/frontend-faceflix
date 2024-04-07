@@ -32,7 +32,7 @@ const FormRegister = () => {
 
       console.log(data);
       setError("");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       setError(error);
     } finally {
