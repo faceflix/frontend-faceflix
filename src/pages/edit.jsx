@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "../components/fragments/Banner";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const EditProfile = () => {
   const navigate = useNavigate();
-
+  const [isOpen, setIsOpen] = useState(false);
+  const clicked = () => {};
   const handleSubmit = (e) => {
     e.preventDefault();
     const res = axios.patch("http://localhost:3000/api/users/current/profile");
@@ -42,21 +43,76 @@ const EditProfile = () => {
           />
         </div>
       </div>
-      <div className="w-full max-w-[400px] mx-auto bg-[var(--whiteBlue)]  mt-20">
-        <form onSubmit={(e) => handleSubmit(e)} action="">
-          <h1 className="text-2xl font-bold">Edit Profile</h1>
-          <input type="text" placeholder="Nama kamu disini" />
-          <input type="text" placeholder="title kamu disini" />
-          <input type="text" placeholder="Deskripsi" />
-          <h1 className="text-2xl font-bold">Edit Account</h1>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Email" />
-          <button onClick={() => navigate("/")}>Cancel</button>
-          <button type="submit">Save</button>
-        </form>
+      <div className="mt-20 px-7">
+        <div className="w-full sm:max-w-[400px] sm:mx-auto bg-[var(--whiteBlue)] px-3 py-2">
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="flex flex-col gap-2">
+              <h1 className="text-2xl font-bold">Edit Profile</h1>
+              <Input
+                type={"text"}
+                placeholder={"Nama Kamu disini"}
+                name={"name"}
+              />
+              <Input
+                type={"text"}
+                placeholder={"Title Kamu Disini"}
+                name={"title"}
+              />
+              <textarea
+                name=""
+                placeholder="Deskripsikan Kamu tulis Disini"
+                id=""
+                cols="35"
+                rows="6"
+              ></textarea>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h1 className="text-2xl font-bold">Edit Account</h1>
+              <Input name={"email"} type="email" placeholder="Email" />
+              <div className="w-full bg-white h-10 flex px-3 outline outline-0 focus:outline-1  active:outline-1">
+                <Input
+                  name={"password"}
+                  type={isOpen ? "text" : "password"}
+                  placeholder="Password"
+                  className="w-full outline-none "
+                />
+                <button onClick={() => setIsOpen((x) => !x)}>
+                  <img
+                    src={`icon/eye-${isOpen ? "open" : "close"}.png`}
+                    alt=""
+                  />
+                </button>
+              </div>
+            </div>
+            <div className="mt-3 flex gap-1">
+              <button
+                className="bg-gray-500 text-white text-xl px-3 h-8"
+                onClick={() => navigate("/")}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-blue-500 text-white text-xl px-3 h-8"
+                type="submit"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
+const Input = ({ placeholder, type, name, className = "w-full px-3 py-2" }) => {
+  return (
+    <input
+      className={className}
+      type={type}
+      name={name}
+      placeholder={placeholder}
+    />
+  );
+};
 export default EditProfile;
