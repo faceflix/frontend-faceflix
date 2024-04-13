@@ -5,62 +5,101 @@ import axios from "axios";
 const EditProfile = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [imageBackground, setImageBackground] = useState("");
-  const [imagePhoto, setImagePhoto] = useState("");
-  const handleChangePhoto = (e) => {
+  const [backgroundImage, setBackgroundImage] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const handleBackground = (e) => {
     const file = e.target.files[0];
     console.log(file);
     let reader = new FileReader();
     reader.onload = function (event) {
-      setImageBackground(event.target.result);
+      setBackgroundImage(event.target.result);
     };
     reader.readAsDataURL(file);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const res = axios.patch("http://localhost:3000/api/users/current/profile");
+  const handlePhoto = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    let reader = new FileReader();
+    reader.onload = function (event) {
+      setProfileImage(event.target.result);
+    };
+    reader.readAsDataURL(file);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const name = e.target[2].value;
+    const title = e.target[3].value;
+    const description = e.target[4].value;
+    const email = e.target[5].value;
+    const password = e.target[6].value;
+    const form = new FormData();
+    form.append("name", name);
+    form.append("title", title);
+    form.append("description", description);
+    form.append("email", email);
+    form.append("password", password);
+    form.append("profileImage", e.target[0].files[0]);
+    form.append("backgroundImage", e.target[1].files[0]);
+    console.log(form.getAll("name"));
+    const config = {
+      method: "PATCH",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: form,
+    };
+    console.log(form);
+    try {
+      const res = await fetch(
+        "http://localhost:3000/api/users/current/profile",
+        config
+      );
+      const data = await res.json();
 
-  const handleClick = () => {};
+      console.log(data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="w-full min-h-screen max-w-[500px] mx-auto relative mb-20  ">
-      <button className="w-full max-w-[400px] h-14 mx-auto fixed bottom-0 left-0 right-0 rounded-full bg-[var(--whiteBlue)]">
-        <div className="inline-block py-1 px-3 border-2 border-[var(--lightBlue)] font-bold text-[var(--lightBlue)] rounded-xl">
-          +
-        </div>
-      </button>
-      <Banner
-        onClick={handleClick}
-        bg="bg-gray-400"
-        display="flex justify-center items-center"
-        src={imageBackground || "icon/icon-image.png"}
-        w={`${imageBackground ? "w-full" : "w-14 h-14 mx-auto"} `}
-      >
-        <input
-          accept="image/*"
-          onChange={(e) => handleChangePhoto(e)}
-          className="absolute opacity-0 inset-0 w-full h-full"
-          type="file"
-        />
-      </Banner>
-      <div className=" flex  gap-5 items-end absolute top-16 left-5">
-        <div className="  w-24 h-24  flex items-center justify-center bg-gray-400 border-2  border-[var(--primary)] overflow-hidden rounded-full relative ">
-          <img
-            src={imagePhoto || "icon/icon-image.png"}
-            className=" object-cover object-center"
-            alt=""
-          />
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <div className="w-full min-h-screen max-w-[500px] mx-auto relative mb-20  ">
+        <Banner
+          bg="bg-gray-400"
+          display="flex justify-center items-center"
+          src={backgroundImage || "icon/icon-image.png"}
+          w={`${backgroundImage ? "w-full" : "w-14 h-14 mx-auto"} `}
+        >
           <input
-            onChange={(e) => setImagePhoto(e.target.value)}
-            className="absolute opacity-0 inset-0 w-full h-full"
-            type="file"
             accept="image/*"
+            onChange={(e) => handleBackground(e)}
+            className="absolute opacity-0 inset-0 w-full h-full"
+            name="backgroundImage"
+            type="file"
           />
+        </Banner>
+        <div className=" flex  gap-5 items-end absolute top-16 left-5">
+          <div className="  w-24 h-24  flex items-center justify-center bg-gray-400 border-2  border-[var(--primary)] overflow-hidden rounded-full relative ">
+            <img
+              src={profileImage || "icon/icon-image.png"}
+              className={`${
+                profileImage ? "w-full h-full" : ""
+              } object-cover object-center`}
+              alt=""
+            />
+            <input
+              onChange={(e) => handlePhoto(e)}
+              className="absolute opacity-0 inset-0 w-full h-full"
+              type="file"
+              accept="image/*"
+              name="profileImage"
+            />
+          </div>
         </div>
-      </div>
-      <div className="mt-20 px-7">
-        <div className="w-full sm:max-w-[400px] sm:mx-auto bg-[var(--whiteBlue)] px-3 py-2">
-          <form onSubmit={(e) => handleSubmit(e)}>
+        <div className="mt-20 px-7">
+          <div className="w-full sm:max-w-[400px] sm:mx-auto bg-[var(--whiteBlue)] px-3 py-2">
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-bold">Edit Profile</h1>
               <Input
@@ -74,7 +113,7 @@ const EditProfile = () => {
                 name={"title"}
               />
               <textarea
-                name=""
+                name="description"
                 placeholder="Deskripsikan Kamu tulis Disini"
                 className="px-3"
                 id=""
@@ -102,6 +141,7 @@ const EditProfile = () => {
             </div>
             <div className="mt-3 flex gap-1">
               <button
+                type="button"
                 className="bg-gray-500 text-white text-xl px-3 h-8"
                 onClick={() => navigate("/")}
               >
@@ -114,10 +154,10 @@ const EditProfile = () => {
                 Save
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

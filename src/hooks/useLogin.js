@@ -1,15 +1,18 @@
-import { redirect } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const useLogin = () => {
-  const [isLogin, setIsLogin] = useState("");
-  if (localStorage.getItem("token")) {
-    setIsLogin(localStorage.getItem("token"));
-  }
+  const [token, setToken] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+    navigate("/login");
+  }, [navigate]);
 
-  redirect("/login");
   return {
-    isLogin,
+    token,
   };
 };
 

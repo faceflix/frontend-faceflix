@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const AuthLayouts = ({ children, title }) => {
   return (
-    <div className="bg-auth mt-[5.5rem] flex flex-col px-10  justify-center w-full sm:max-w-[35rem] md:max-w-[30rem] mx-auto">
+    <div className="bg-auth mt-[5.5rem] flex flex-col px-10  justify-center w-full sm:max-w-[30rem]  mx-auto ">
       <header>
         <h2 className="  text-center font-mono font-bold italic text-[2rem]">
           Face Flix

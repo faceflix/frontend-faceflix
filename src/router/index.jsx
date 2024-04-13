@@ -4,12 +4,23 @@ import HomePage from "../pages/home";
 import ErrorPage from "../pages/error";
 import RegisterPage from "../pages/register";
 import EditProfile from "../pages/edit";
+import LayoutsPage from "../components/layouts/layoutsPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <LayoutsPage />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/edit",
+        element: <EditProfile />,
+      },
+    ],
   },
   {
     path: "/login",
@@ -20,10 +31,6 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/edit",
-    element: <EditProfile />,
   },
 ]);
 

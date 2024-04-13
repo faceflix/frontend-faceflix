@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const getUserCurrent = async (callback, token) => {
+export const getUserCurrent = async (callback, token, error) => {
   try {
     const config = {
       method: "get",
       headers: {
-        Authorization: "Bearer " + token,
+        Authorization: `Bearer ${token}`,
         accept: "application/json",
         "Content-Type": "application/json",
       },
@@ -15,7 +15,8 @@ export const getUserCurrent = async (callback, token) => {
       config
     );
     callback(res.data.data);
-  } catch (error) {
-    console.log(error);
+    console.log(res.data.data);
+  } catch (err) {
+    error(err);
   }
 };

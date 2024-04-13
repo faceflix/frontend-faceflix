@@ -52,7 +52,10 @@ const FormLogin = () => {
       <div className="text-center">
         {error ? <p className="text-[13px] text-red-500">{error}</p> : null}
       </div>
-      <Form onSubmit={(e) => handleSubmit(e)} className={"flex flex-col gap-2"}>
+      <Form
+        onSubmit={(e) => handleSubmit(e)}
+        className={"  flex flex-col gap-2"}
+      >
         <input
           className="rounded-md bg-[#ffeed9] h-10 px-5"
           name="email"
