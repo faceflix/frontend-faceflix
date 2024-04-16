@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const ButtonNavigation = ({ activeIndex, setActiveIndex }) => {
   return (
-    <div className="bg-[var(--whiteBlue)] mt-5 mx-auto rounded-full flex w-full max-w-[300px]  overflow-hidden relative">
+    <div className="bg-[var(--whiteBlue)] mt-5 mx-auto rounded-full flex w-full max-w-[286px]  overflow-hidden relative">
       <div
         className={`${
           activeIndex == 0
@@ -18,23 +18,15 @@ const ButtonNavigation = ({ activeIndex, setActiveIndex }) => {
          `}
       ></div>
       <Button
-        i={0}
-        activeIndex={activeIndex}
         onClick={() => setActiveIndex(0)}
         src="iconToggle/image.png"
       ></Button>
       <Button
         i={1}
-        activeIndex={activeIndex}
         onClick={() => setActiveIndex(1)}
         src="iconToggle/video.png"
       />
-      <Button
-        i={2}
-        activeIndex={activeIndex}
-        onClick={() => setActiveIndex(2)}
-        src="iconToggle/blog.png"
-      />
+      <Button onClick={() => setActiveIndex(2)} src="iconToggle/blog.png" />
     </div>
   );
 };

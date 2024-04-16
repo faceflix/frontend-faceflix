@@ -5,6 +5,10 @@ import ErrorPage from "../pages/error";
 import RegisterPage from "../pages/register";
 import EditProfile from "../pages/edit";
 import LayoutsPage from "../components/layouts/layoutsPage";
+import PostPage from "../pages/post";
+import ImagePost from "../pages/images";
+import VideoPost from "../pages/video";
+import BlogPost from "../pages/blog";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +35,23 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/post",
+    element: <PostPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/post/image",
+    element: <ImagePost />,
+  },
+  {
+    path: "/post/video",
+    element: <VideoPost />,
+  },
+  {
+    path: "/post/blog",
+    element: <BlogPost />,
   },
 ]);
 

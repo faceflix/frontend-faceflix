@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Banner from "../components/fragments/Banner";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Input from "../components/Elements/Input";
+import ButtonCancelAndSave from "../components/fragments/ButtonCancelAndSave";
 const EditProfile = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -38,8 +40,8 @@ const EditProfile = () => {
     form.append("description", description);
     form.append("email", email);
     form.append("password", password);
-    form.append("profileImage", e.target[0].files[0]);
-    form.append("backgroundImage", e.target[1].files[0]);
+    form.append("backgroundImage", e.target[0].files[0]);
+    form.append("profileImage", e.target[1].files[0]);
     console.log(form.getAll("name"));
     const config = {
       method: "PATCH",
@@ -65,7 +67,7 @@ const EditProfile = () => {
   };
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <div className="w-full min-h-screen max-w-[500px] mx-auto relative mb-20  ">
+      <div className="w-full min-h-screen max-w-[532px] mx-auto relative mb-20  ">
         <Banner
           bg="bg-gray-400"
           display="flex justify-center items-center"
@@ -140,19 +142,7 @@ const EditProfile = () => {
               </div>
             </div>
             <div className="mt-3 flex gap-1">
-              <button
-                type="button"
-                className="bg-gray-500 text-white text-xl px-3 h-8"
-                onClick={() => navigate("/")}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-blue-500 text-white text-xl px-3 h-8"
-                type="submit"
-              >
-                Save
-              </button>
+              <ButtonCancelAndSave />
             </div>
           </div>
         </div>
@@ -161,14 +151,4 @@ const EditProfile = () => {
   );
 };
 
-const Input = ({ placeholder, type, name, className = "w-full px-3 py-2" }) => {
-  return (
-    <input
-      className={className}
-      type={type}
-      name={name}
-      placeholder={placeholder}
-    />
-  );
-};
 export default EditProfile;

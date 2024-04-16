@@ -15,7 +15,6 @@ export const getUserCurrent = async (callback, token, error) => {
       config
     );
     callback(res.data.data);
-    console.log(res.data.data);
   } catch (err) {
     error(err);
   }
