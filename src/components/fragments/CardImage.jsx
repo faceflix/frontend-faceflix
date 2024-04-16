@@ -51,7 +51,6 @@ const CardImage = ({ id }) => {
           throw new Error("Images not found !!!");
         }
         const getImages = await res.json();
-        console.log(getImages);
         setImage(getImages.data);
       } catch (error) {
         console.log(error);
@@ -70,7 +69,7 @@ const CardImage = ({ id }) => {
           image.map((item) => (
             <div key={item?.id} className="mb-4">
               <img
-                onClick={(e) => handleClick(item?.id)}
+                onClick={() => handleClick(item?.id)}
                 className="w-full cursor-pointer"
                 src={item?.image}
                 alt={item?.title}
@@ -83,7 +82,7 @@ const CardImage = ({ id }) => {
           </p>
         )}
       </section>
-      {isOpen && <Modal image={imagebyId} onclose={() => setIsOpen(false)} />}
+      {isOpen && <Modal data={imagebyId} onclose={() => setIsOpen(false)} />}
     </>
   );
 };

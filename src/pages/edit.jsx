@@ -58,7 +58,6 @@ const EditProfile = () => {
         config
       );
       const data = await res.json();
-
       console.log(data);
       navigate("/");
     } catch (error) {

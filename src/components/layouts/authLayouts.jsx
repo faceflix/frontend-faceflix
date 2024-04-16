@@ -28,7 +28,7 @@ const AuthLayouts = ({ children, title }) => {
         Continue With Google
       </h2>
       <div className="flex justify-center items-center text-[12px] mt-3 gap-1">
-        <p>Forgot Password!</p>
+        {title == "register" ? "Remember Password?" : "Forgot Password?"}
         <div className="h-3 w-[1px] bg-black"></div>
         <p>
           {title == "register" ? "Do you have Account?" : "Need new Account?"}

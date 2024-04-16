@@ -29,11 +29,6 @@ const ImagePost = () => {
     form.append("title", title);
     form.append("description", description);
     form.append("image", e.target[3].files[0]);
-
-    console.log(form.getAll("name"));
-    console.log(form.getAll("title"));
-    console.log(form.getAll("description"));
-    console.log(form.getAll("image"));
     const config = {
       method: "POST",
       headers: {
@@ -88,7 +83,6 @@ const ImagePost = () => {
               ></textarea>
               <div className="bg-white w-full max-w-[402px] h-[210px] p-2 cursor-pointer relative">
                 <input
-                  accept="image/*"
                   type="file"
                   onChange={(e) => handleImage(e)}
                   name="image"
@@ -96,8 +90,8 @@ const ImagePost = () => {
                 />
                 <div className=" w-full h-full flex flex-col justify-center  items-center border border-dashed border-black ">
                   {tempImage ? (
-                    <div className="w-full overflow-hidden">
-                      <img src={tempImage} className="w-full" alt="" />
+                    <div className="w-full text-center">
+                      File Has been Uploaded
                     </div>
                   ) : (
                     <>

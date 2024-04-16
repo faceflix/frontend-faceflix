@@ -1,28 +1,14 @@
-import { useEffect, useState } from "react";
-import { getUserCurrent } from "../services/userCurrent";
-import { Link, useNavigate } from "react-router-dom";
-import Banner from "../components/fragments/Banner";
+import { useState } from "react";
 import ButtonNavigation from "../components/fragments/ButtonNavigation";
 import useLogin from "../hooks/useLogin";
 import CardImage from "../components/fragments/CardImage";
 import CardVideo from "../components/fragments/CardVideo";
 import CardBlog from "../components/fragments/CardBlog";
-import Modal from "../components/fragments/Modal";
-import NameAndTitle from "../components/fragments/NameAndTitle";
-import ProfileImage from "../components/fragments/ProfileImage";
 import BannerPhotoLayouts from "../components/layouts/bannerPhotoLayouts";
 
 const HomePage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const navigate = useNavigate();
   const { data } = useLogin();
-  const handleClick = (userId, idImage) => {
-    console.log(`
-    user id : ${userId}
-    image id : ${idImage}
-    `);
-  };
-
   return (
     <>
       <BannerPhotoLayouts>
@@ -34,8 +20,7 @@ const HomePage = () => {
           </section>
           <section className="bg-[var(--whiteBlue)] w-full max-w-[444px] mx-auto mt-3 py-3 px-4 line-clamp-4 text-sm text-justify overflow-hidden rounded-xl">
             <p className="text-lg">
-              {data?.description ||
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem."}
+              {data?.description || "Your Description In here"}
             </p>
           </section>
           <ButtonNavigation
