@@ -26,7 +26,6 @@ const CardBlog = ({ id }) => {
         }
         const getBlogs = await res.json();
         setBlogs(getBlogs.data);
-        console.log(getBlogs);
       } catch (error) {
         console.log(error);
       }
@@ -65,7 +64,9 @@ const CardBlog = ({ id }) => {
   return (
     <>
       <section
-        className={`mt-5 w-full max-w-[444px] mx-auto  grid grid-cols-2 gap-1    `}
+        className={`mt-5 w-full max-w-[444px] mx-auto  grid ${
+          blogs.length > 0 ? "grid-cols-2" : ""
+        } gap-1    `}
       >
         {blogs.length > 0 ? (
           blogs.map((item) => (
@@ -86,7 +87,7 @@ const CardBlog = ({ id }) => {
             </div>
           ))
         ) : (
-          <p className="text-center text-xl font-bold text-red-500">
+          <p className="text-center   text-xl font-bold text-red-500">
             Data not found
           </p>
         )}

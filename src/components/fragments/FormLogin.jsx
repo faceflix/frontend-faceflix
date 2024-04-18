@@ -27,7 +27,6 @@ const FormLogin = () => {
       });
 
       const data = await res.json();
-      console.log(data);
       if (data.errors) {
         throw data.errors;
       }

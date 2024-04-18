@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../components/fragments/Banner";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Input from "../components/Elements/Input";
 import ButtonCancelAndSave from "../components/fragments/ButtonCancelAndSave";
+import useLogin from "../hooks/useLogin";
+
 const EditProfile = () => {
-  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [error, setError] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState("");
+  const { data } = useLogin();
+  const navigate = useNavigate();
   const handleBackground = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     let reader = new FileReader();
     reader.onload = function (event) {
       setBackgroundImage(event.target.result);
@@ -20,7 +25,6 @@ const EditProfile = () => {
   };
   const handlePhoto = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     let reader = new FileReader();
     reader.onload = function (event) {
       setProfileImage(event.target.result);
@@ -42,7 +46,7 @@ const EditProfile = () => {
     form.append("password", password);
     form.append("backgroundImage", e.target[0].files[0]);
     form.append("profileImage", e.target[1].files[0]);
-    console.log(form.getAll("name"));
+
     const config = {
       method: "PATCH",
       headers: {
@@ -52,18 +56,34 @@ const EditProfile = () => {
       body: form,
     };
     console.log(form);
+
     try {
-      const res = await fetch(
-        "http://localhost:3000/api/users/current/profile",
-        config
-      );
-      const data = await res.json();
-      console.log(data);
-      navigate("/");
+      if (email && !password) {
+        setError("Password kosong");
+      } else if (email === data?.email && password === data?.password) {
+        setError("Password mirip dengan yang sebelumnya, coba yang lain");
+      } else {
+        const res = await fetch(
+          `http://localhost:3000/api/users/current/profile`,
+          config
+        );
+        const updateProfile = await res.json();
+        if (updateProfile.errors) {
+          throw updateProfile.errors;
+        }
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
+      setError(error);
     }
   };
+
+  useEffect(() => {
+    setName(data?.name || "");
+    setTitle(data?.title || "");
+    setDesc(data?.description || "");
+  }, [data?.name, data?.title, data?.description]);
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <div className="w-full min-h-screen max-w-[532px] mx-auto relative mb-20  ">
@@ -103,21 +123,29 @@ const EditProfile = () => {
           <div className="w-full sm:max-w-[400px] sm:mx-auto bg-[var(--whiteBlue)] px-3 py-2">
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-bold">Edit Profile</h1>
+              {error ? (
+                <p className="mx-auto text-red-500 text-sm italic">{error}</p>
+              ) : null}
               <Input
                 type={"text"}
                 placeholder={"Nama Kamu disini"}
                 name={"name"}
+                onChange={(e) => setName(e.target.value)}
+                value={name}
               />
               <Input
                 type={"text"}
                 placeholder={"Title Kamu Disini"}
                 name={"title"}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
               <textarea
                 name="description"
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
                 placeholder="Deskripsikan Kamu tulis Disini"
                 className="px-3"
-                id=""
                 cols="35"
                 rows="6"
               ></textarea>

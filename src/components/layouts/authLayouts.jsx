@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const AuthLayouts = ({ children, title }) => {
   return (
-    <div className="bg-auth mt-[5.5rem] flex flex-col px-10  justify-center w-full sm:max-w-[30rem]  mx-auto ">
+    <div className="bg-auth mt-[5.5rem] flex flex-col px-10  justify-center w-full max-w-[33.5rem]  mx-auto ">
       <header>
         <h2 className="  text-center font-mono font-bold italic text-[2rem]">
           Face Flix
@@ -16,7 +16,7 @@ const AuthLayouts = ({ children, title }) => {
       {children}
       <div className="relative mt-[20px]">
         <hr className="bg-black" />
-        <div className="bg-white absolute  px-5 left-28 sm:left-[12.9rem] md:left-[10.2rem] -top-3   ">
+        <div className="bg-white absolute  px-5 left-[50%] right-[50%] -top-3 -translate-x-10   ">
           OR
         </div>
       </div>

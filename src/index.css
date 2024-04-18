@@ -27,7 +27,7 @@
   right: 0;
   top: 0;
 
-  @apply sm:max-w-[400px] sm:mx-auto;
+  @apply max-w-[444px] mx-auto;
 }
 .bg-auth::before {
   content: "";
@@ -41,7 +41,7 @@
   right: 0;
   bottom: -50px;
 
-  @apply sm:max-w-[400px] sm:mx-auto  sm:bottom-[-100px];
+  @apply max-w-[444px] mx-auto  sm:bottom-[-100px];
 }
 
 .gallery {
@@ -51,5 +51,4 @@
   -webkit-column-width: 66%;
   -moz-column-width: 66%;
   column-width: 66%;
-  /* padding: 0 12px; */
 }

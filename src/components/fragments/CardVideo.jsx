@@ -73,7 +73,9 @@ const CardVideo = ({ id }) => {
             );
           })
         ) : (
-          <p>Video not found</p>
+          <p className="text-red-500 text-center text-xl font-bold">
+            Video not found
+          </p>
         )}
       </section>
       {isOpen && <Modal data={videoById} onclose={() => setIsOpen(false)} />}
