@@ -38,12 +38,14 @@ const EditProfile = () => {
     const description = e.target[4].value;
     const email = e.target[5].value;
     const password = e.target[6].value;
+    let pass = password.toString();
+    console.log(typeof password);
     const form = new FormData();
     form.append("name", name);
     form.append("title", title);
     form.append("description", description);
     form.append("email", email);
-    form.append("password", password);
+    form.append("password", password.toString());
     form.append("backgroundImage", e.target[0].files[0]);
     form.append("profileImage", e.target[1].files[0]);
 

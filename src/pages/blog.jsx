@@ -4,17 +4,12 @@ import ButtonCancelAndSave from "../components/fragments/ButtonCancelAndSave";
 import Input from "../components/Elements/Input";
 
 import useLogin from "../hooks/useLogin";
-import Editor from "../components/fragments/Editor";
 import { useNavigate } from "react-router-dom";
 const BlogPost = () => {
   const [error, setError] = useState("");
   const [isTest, setTest] = useState("");
-  const [model, setModel] = useState("Example Set");
   const navigate = useNavigate();
   const { data } = useLogin();
-  const handleModelChange = (event) => {
-    setModel(event);
-  };
 
   const handleSubmit = async (e) => {
     const title = e.target[0].value;
@@ -98,7 +93,6 @@ const BlogPost = () => {
                   </div>
                 </div>
               </div>
-              <Editor handleModelChange={handleModelChange} model={model} />
               <div className="mt-4 flex justify-end gap-1">
                 <ButtonCancelAndSave />
               </div>
