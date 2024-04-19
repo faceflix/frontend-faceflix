@@ -82,7 +82,7 @@ npm run dev
 
 ## Edit Page
 
-- user dapat melakukan edit bagian halaman awal
+- user can edit content in home page.
 - Can edit :
   - Name (require)
   - Title (opsional)
