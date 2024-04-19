@@ -1,3 +1,36 @@
+# Prerequisites
+
+Before running , make sure you have the following prerequisites installed on your system:
+
+1. Node.js (https://nodejs.org)
+2. npm (Node Package Manager, usually installed along with Node.js).
+3. [For API with Backend](https://github.com/faceflix/backend-faceflix)
+
+# Installation
+
+To set up the Project, follow these steps:
+
+1. Clone this repository to your local machine.
+   example with git clone
+
+```terminal
+git clone https://github.com/faceflix/frontend-faceflix.git
+```
+
+2. Navigate to the project directory using the terminal.
+
+3. Install the required dependencies by running:
+
+```terminal
+npm install
+```
+
+4. then start:
+
+```terminal
+npm run dev
+```
+
 # Alur:
 
 ## LoginPage:
