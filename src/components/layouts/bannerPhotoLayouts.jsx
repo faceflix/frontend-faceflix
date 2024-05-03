@@ -1,10 +1,8 @@
 import NameAndTitle from "../fragments/NameAndTitle";
 import Banner from "../fragments/Banner";
-import useLogin from "../../hooks/useLogin";
 import ProfileImage from "../fragments/ProfileImage";
 
-const BannerPhotoLayouts = ({ children }) => {
-  const { data } = useLogin();
+const BannerPhotoLayouts = ({ children, data }) => {
   return (
     <div className="w-full min-h-screen max-w-[532px] mx-auto relative  ">
       <Banner

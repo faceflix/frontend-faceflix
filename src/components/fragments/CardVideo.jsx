@@ -17,7 +17,7 @@ const CardVideo = ({ id }) => {
       };
       try {
         const res = await fetch(
-          `http://localhost:3000/api/users/${id}/video/${videoId}`,
+          `${import.meta.env.VITE_API_URL}/users/${id}/video/${videoId}`,
           config
         );
         if (!res.ok) {
@@ -42,7 +42,7 @@ const CardVideo = ({ id }) => {
       };
       try {
         const res = await fetch(
-          `http://localhost:3000/api/users/${id}/video`,
+          `${import.meta.env.VITE_API_URL}/users/${id}/video`,
           config
         );
         if (!res.ok) {

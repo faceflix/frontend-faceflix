@@ -18,7 +18,7 @@ const CardImage = ({ id }) => {
       };
       try {
         const res = await fetch(
-          `http://localhost:3000/api/users/${id}/image/${imageId}`,
+          `${import.meta.env.VITE_API_URL}/users/${id}/image/${imageId}`,
           config
         );
         if (!res.ok) {
@@ -44,7 +44,7 @@ const CardImage = ({ id }) => {
       };
       try {
         const res = await fetch(
-          `http://localhost:3000/api/users/${id}/image`,
+          `${import.meta.env.VITE_API_URL}/users/${id}/image`,
           config
         );
         if (!res.ok) {

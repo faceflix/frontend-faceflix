@@ -17,7 +17,7 @@ const FormLogin = () => {
       password,
     };
     try {
-      const res = await fetch("http://localhost:3000/api/users/login", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
         method: "POST",
         headers: {
           accept: "application/json",

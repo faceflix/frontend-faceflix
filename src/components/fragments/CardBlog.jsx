@@ -18,7 +18,7 @@ const CardBlog = ({ id }) => {
       };
       try {
         const res = await fetch(
-          `http://localhost:3000/api/users/${id}/blog`,
+          `${import.meta.env.VITE_API_URL}/users/${id}/blog`,
           config
         );
         if (!res.ok) {
@@ -46,7 +46,7 @@ const CardBlog = ({ id }) => {
       };
       try {
         const res = await fetch(
-          `http://localhost:3000/api/users/${id}/blog/${blogId}`,
+          `${import.meta.env.VITE_API_URL}/users/${id}/blog/${blogId}`,
           config
         );
         if (!res.ok) {

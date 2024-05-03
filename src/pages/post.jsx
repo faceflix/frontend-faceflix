@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import BannerPhotoLayouts from "../components/layouts/bannerPhotoLayouts";
+import useLogin from "../hooks/useLogin";
 
 const PostPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const urlImage = ["image", "video", "blog"];
+  const { data } = useLogin();
   return (
-    <BannerPhotoLayouts>
+    <BannerPhotoLayouts data={data}>
       <main className="mt-32 px-7">
         <div className="w-full sm:max-w-[400px] sm:mx-auto bg-[var(--whiteBlue)] px-10 py-5 rounded-2xl">
           <p className="text-3xl font-bold mb-3">Select Post</p>

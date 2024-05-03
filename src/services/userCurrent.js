@@ -11,7 +11,7 @@ export const getUserCurrent = async (callback, token, error) => {
       },
     };
     const res = await axios.get(
-      "http://localhost:3000/api/users/current",
+      `${import.meta.env.VITE_API_URL}/users/current`,
       config
     );
     callback(res.data.data);

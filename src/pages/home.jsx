@@ -11,7 +11,7 @@ const HomePage = () => {
   const { data } = useLogin();
   return (
     <>
-      <BannerPhotoLayouts>
+      <BannerPhotoLayouts data={data}>
         <main className="mt-32 px-8">
           <section className="w-full max-w-[444px] mx-auto py-1 px-3 flex justify-around bg-[var(--whiteBlue)]  rounded-2xl ">
             <AmountOfContent num={data?.countImage} title={"Image"} />

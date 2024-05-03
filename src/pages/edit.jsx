@@ -1,91 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../components/fragments/Banner";
-import { useNavigate } from "react-router-dom";
 import Input from "../components/Elements/Input";
 import ButtonCancelAndSave from "../components/fragments/ButtonCancelAndSave";
-import useLogin from "../hooks/useLogin";
+import useHandleEdit from "../hooks/useHandleEdit";
 
 const EditProfile = () => {
-  const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [error, setError] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [profileImage, setProfileImage] = useState("");
-  const [backgroundImage, setBackgroundImage] = useState("");
-  const { data } = useLogin();
-  const navigate = useNavigate();
-  const handleBackground = (e) => {
-    const file = e.target.files[0];
-    let reader = new FileReader();
-    reader.onload = function (event) {
-      setBackgroundImage(event.target.result);
-    };
-    reader.readAsDataURL(file);
-  };
-  const handlePhoto = (e) => {
-    const file = e.target.files[0];
-    let reader = new FileReader();
-    reader.onload = function (event) {
-      setProfileImage(event.target.result);
-    };
-    reader.readAsDataURL(file);
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const name = e.target[2].value;
-    const title = e.target[3].value;
-    const description = e.target[4].value;
-    const email = e.target[5].value;
-    const password = e.target[6].value;
-    let pass = password.toString();
-    console.log(typeof password);
-    const form = new FormData();
-    form.append("name", name);
-    form.append("title", title);
-    form.append("description", description);
-    form.append("email", email);
-    form.append("password", password.toString());
-    form.append("backgroundImage", e.target[0].files[0]);
-    form.append("profileImage", e.target[1].files[0]);
-
-    const config = {
-      method: "PATCH",
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: form,
-    };
-    console.log(form);
-
-    try {
-      if (email && !password) {
-        setError("Password kosong");
-      } else if (email === data?.email && password === data?.password) {
-        setError("Password mirip dengan yang sebelumnya, coba yang lain");
-      } else {
-        const res = await fetch(
-          `http://localhost:3000/api/users/current/profile`,
-          config
-        );
-        const updateProfile = await res.json();
-        if (updateProfile.errors) {
-          throw updateProfile.errors;
-        }
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      setError(error);
-    }
-  };
-
-  useEffect(() => {
-    setName(data?.name || "");
-    setTitle(data?.title || "");
-    setDesc(data?.description || "");
-  }, [data?.name, data?.title, data?.description]);
+  const {
+    name,
+    setName,
+    title,
+    setTitle,
+    desc,
+    setDesc,
+    error,
+    isOpen,
+    setIsOpen,
+    profileImage,
+    backgroundImage,
+    handleBackground,
+    handlePhoto,
+    handleSubmit,
+  } = useHandleEdit();
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <div className="w-full min-h-screen max-w-[532px] mx-auto relative mb-20  ">

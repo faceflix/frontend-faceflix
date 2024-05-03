@@ -1,51 +1,14 @@
-import React, { useEffect, useState } from "react";
 import BannerPhotoLayouts from "../components/layouts/bannerPhotoLayouts";
 import ButtonCancelAndSave from "../components/fragments/ButtonCancelAndSave";
 import Input from "../components/Elements/Input";
 
-import useLogin from "../hooks/useLogin";
-import { useNavigate } from "react-router-dom";
+import useHandleBlog from "../hooks/useHandleBlog";
 const BlogPost = () => {
-  const [error, setError] = useState("");
-  const [isTest, setTest] = useState("");
-  const navigate = useNavigate();
-  const { data } = useLogin();
+  const { isLogin, error, isTest, handleSubmit } = useHandleBlog();
 
-  const handleSubmit = async (e) => {
-    const title = e.target[0].value;
-    const text = e.target[1].value;
-    e.preventDefault();
-    const config = {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({ title, text }),
-    };
-
-    try {
-      const res = await fetch(
-        `http://localhost:3000/api/users/${data?.id}/blog`,
-        config
-      );
-      const postBlog = await res.json();
-      if (postBlog.errors) {
-        throw postBlog.errors;
-      }
-      if (postBlog.statusCode == 201) {
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      setError(error);
-    }
-  };
   const handleImage = () => {};
-  console.log(data?.id);
   return (
-    <BannerPhotoLayouts>
+    <BannerPhotoLayouts data={isLogin}>
       <div>
         <main className="mt-32 px-8">
           <div className="w-full sm:max-w-[444px] sm:mx-auto bg-[var(--whiteBlue)] px-10 py-5 rounded-2xl">
