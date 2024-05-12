@@ -47,11 +47,8 @@ const CardImage = ({ id }) => {
           `${import.meta.env.VITE_API_URL}/users/${id}/image`,
           config
         );
-        if (!res.ok) {
-          throw new Error("Images not found !!!");
-        }
-        const getImages = await res.json();
-        setImage(getImages.data);
+        const json = await res.json();
+        setImage(json.data);
       } catch (error) {
         console.log(error);
       }
@@ -78,7 +75,7 @@ const CardImage = ({ id }) => {
           ))
         ) : (
           <p className="text-center text-xl font-bold text-red-500">
-            Data not found
+            Images not found
           </p>
         )}
       </section>

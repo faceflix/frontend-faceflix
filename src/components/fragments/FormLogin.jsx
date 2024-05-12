@@ -7,10 +7,11 @@ const FormLogin = () => {
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [isLogin, setIsLogin] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLogin(true);
 
     const user = {
       email,
@@ -27,6 +28,7 @@ const FormLogin = () => {
       });
 
       const data = await res.json();
+      console.log(data);
       if (data.errors) {
         throw data.errors;
       }
@@ -38,6 +40,7 @@ const FormLogin = () => {
     } finally {
       setEmail("");
       setPassword("");
+      setIsLogin(false);
     }
   };
 
@@ -52,6 +55,8 @@ const FormLogin = () => {
         {error ? <p className="text-[13px] text-red-500">{error}</p> : null}
       </div>
       <Form
+        isDisabled={isLogin}
+        onClick={() => setError("")}
         onSubmit={(e) => handleSubmit(e)}
         className={"  flex flex-col gap-2"}
       >
@@ -62,6 +67,7 @@ const FormLogin = () => {
           placeholder="Masukkan email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <input
           className="rounded-md bg-[#ffeed9] h-10 px-5"
@@ -70,6 +76,7 @@ const FormLogin = () => {
           type="password"
           placeholder="Masukkan Password"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </Form>
     </div>

@@ -21,9 +21,6 @@ const CardBlog = ({ id }) => {
           `${import.meta.env.VITE_API_URL}/users/${id}/blog`,
           config
         );
-        if (!res.ok) {
-          throw new Error("Blogs not found !!!");
-        }
         const getBlogs = await res.json();
         setBlogs(getBlogs.data);
       } catch (error) {
@@ -66,7 +63,7 @@ const CardBlog = ({ id }) => {
       <section
         className={`mt-5 w-full max-w-[444px] mx-auto  grid ${
           blogs.length > 0 ? "grid-cols-2" : ""
-        } gap-1    `}
+        } gap-1`}
       >
         {blogs.length > 0 ? (
           blogs.map((item) => (
@@ -88,7 +85,7 @@ const CardBlog = ({ id }) => {
           ))
         ) : (
           <p className="text-center   text-xl font-bold text-red-500">
-            Data not found
+            Blogs not found
           </p>
         )}
       </section>

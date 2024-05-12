@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ButtonCancelAndSave = ({ isDisable }) => {
+const ButtonCancelAndSave = ({ isDisable, isLoading }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -16,7 +16,7 @@ const ButtonCancelAndSave = ({ isDisable }) => {
         disabled={isDisable}
         className={`bg-blue-500  ${
           isDisable ? "bg-blue-800" : "bg-blue-500 hover:bg-blue-700"
-        } text-white text-xl px-3 h-8`}
+        }  text-white text-xl px-3 h-8`}
         type="submit"
       >
         Save

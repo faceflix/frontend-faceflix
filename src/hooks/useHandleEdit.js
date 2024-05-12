@@ -10,6 +10,7 @@ const useHandleEdit = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profileImage, setProfileImage] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { data } = useLogin();
   const navigate = useNavigate();
   const handleBackground = (e) => {
@@ -30,6 +31,7 @@ const useHandleEdit = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const name = e.target[2].value;
     const title = e.target[3].value;
     const description = e.target[4].value;
@@ -74,6 +76,8 @@ const useHandleEdit = () => {
     } catch (error) {
       console.log(error);
       setError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -100,6 +104,7 @@ const useHandleEdit = () => {
     handleBackground,
     handlePhoto,
     handleSubmit,
+    isLoading,
   };
 };
 

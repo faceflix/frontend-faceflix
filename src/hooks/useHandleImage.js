@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const useHandleImage = () => {
   const [tempImage, setTempImage] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { data } = useLogin();
   const navigate = useNavigate();
   const handleImage = (e) => {
@@ -18,6 +19,7 @@ const useHandleImage = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const name = e.target[0].value;
     const title = e.target[1].value;
     const description = e.target[2].value;
@@ -49,6 +51,8 @@ const useHandleImage = () => {
     } catch (error) {
       console.log(error);
       setError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   return {
@@ -56,7 +60,8 @@ const useHandleImage = () => {
     handleImage,
     handleSubmit,
     error,
-    isLogin: !!data,
+    isLogin: data,
+    isLoading,
   };
 };
 

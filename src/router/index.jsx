@@ -13,45 +13,42 @@ import BlogPost from "../pages/blog";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LayoutsPage />,
-    errorElement: <ErrorPage />,
+    element: <LayoutsPage key="layouts" />,
+    errorElement: <ErrorPage key="error" />,
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <HomePage key="home" />,
       },
       {
         path: "/edit",
-        element: <EditProfile />,
+        element: <EditProfile key="edit" />,
       },
     ],
   },
   {
     path: "/login",
-    element: <LoginPage />,
-    errorElement: <ErrorPage />,
+    element: <LoginPage key="login" />,
   },
   {
     path: "/register",
-    element: <RegisterPage />,
-    errorElement: <ErrorPage />,
+    element: <RegisterPage key="register" />,
   },
   {
     path: "/post",
-    element: <PostPage />,
-    errorElement: <ErrorPage />,
+    element: <PostPage key="post" />,
   },
   {
     path: "/post/image",
-    element: <ImagePost />,
+    element: <ImagePost key="image" />,
   },
   {
     path: "/post/video",
-    element: <VideoPost />,
+    element: <VideoPost key="video" />,
   },
   {
     path: "/post/blog",
-    element: <BlogPost />,
+    element: <BlogPost key="blog" />,
   },
 ]);
 

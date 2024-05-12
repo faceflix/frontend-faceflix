@@ -5,11 +5,13 @@ import useLogin from "../hooks/useLogin";
 const useHandleBlog = () => {
   const [error, setError] = useState("");
   const [isTest, setTest] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { data } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const title = e.target[0].value;
     const text = e.target[1].value;
     try {
@@ -36,6 +38,8 @@ const useHandleBlog = () => {
     } catch (error) {
       console.log(error);
       setError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   return {
@@ -44,6 +48,7 @@ const useHandleBlog = () => {
     handleSubmit,
     isTest,
     setTest,
+    isLoading,
   };
 };
 

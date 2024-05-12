@@ -4,7 +4,7 @@ import Input from "../components/Elements/Input";
 
 import useHandleBlog from "../hooks/useHandleBlog";
 const BlogPost = () => {
-  const { isLogin, error, isTest, handleSubmit } = useHandleBlog();
+  const { isLogin, error, isTest, handleSubmit, isLoading } = useHandleBlog();
 
   const handleImage = () => {};
   return (
@@ -57,7 +57,7 @@ const BlogPost = () => {
                 </div>
               </div>
               <div className="mt-4 flex justify-end gap-1">
-                <ButtonCancelAndSave />
+                <ButtonCancelAndSave isDisable={isLoading} />
               </div>
             </div>
           </form>

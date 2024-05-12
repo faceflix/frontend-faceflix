@@ -17,31 +17,34 @@
 
 .bg-auth::after {
   content: "";
-  position: fixed;
-  background: url("background-atas.svg");
+  background: url("/login/bg-up.png");
   background-position: center;
   background-size: cover;
   width: 100%;
+  max-width: 400px;
   height: 5rem;
+  transform: scaleX(1.2);
+  margin: 0 auto;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
-
-  @apply max-w-[444px] mx-auto;
 }
 .bg-auth::before {
   content: "";
   position: fixed;
-  background: url("background-bawah.svg");
+  background: url("/login/bg-bottom.png");
   background-position: center;
   background-size: cover;
   width: 100%;
+  max-width: 400px;
+  transform: scaleX(1.15);
   height: 15rem;
   left: 0;
   right: 0;
   bottom: -50px;
 
-  @apply max-w-[444px] mx-auto  sm:bottom-[-100px];
+  @apply mx-auto  sm:bottom-[-100px];
 }
 
 .gallery {
