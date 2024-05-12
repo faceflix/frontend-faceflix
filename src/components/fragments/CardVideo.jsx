@@ -20,9 +20,6 @@ const CardVideo = ({ id }) => {
           `${import.meta.env.VITE_API_URL}/users/${id}/video/${videoId}`,
           config
         );
-        if (!res.ok) {
-          throw new Error("Video not found !!!");
-        }
         const getVideo = await res.json();
         setVideoById(getVideo?.data);
       } catch (error) {

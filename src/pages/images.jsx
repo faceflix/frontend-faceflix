@@ -64,7 +64,7 @@ const ImagePost = () => {
             </div>
 
             <div className="mt-4 flex justify-end gap-1">
-              <ButtonCancelAndSave />
+              <ButtonCancelAndSave isDisable={!tempImage} />
             </div>
           </div>
         </form>

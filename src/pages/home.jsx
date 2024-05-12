@@ -8,6 +8,7 @@ import BannerPhotoLayouts from "../components/layouts/bannerPhotoLayouts";
 
 const HomePage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+
   const { data } = useLogin();
   return (
     <>

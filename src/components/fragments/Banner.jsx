@@ -8,7 +8,7 @@ const Banner = ({ bg, display, src, w, onClick, children }) => {
       <img
         onClick={onClick}
         src={src}
-        className={`${w} object-cover  object-center`}
+        className={`${w} object-cover  object-center h-full`}
       ></img>
       {children}
     </div>

@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const getUserCurrent = async (callback, token, error) => {
   try {
     const config = {
@@ -10,12 +8,18 @@ export const getUserCurrent = async (callback, token, error) => {
         "Content-Type": "application/json",
       },
     };
-    const res = await axios.get(
+    const res = await fetch(
       `${import.meta.env.VITE_API_URL}/users/current`,
       config
     );
-    callback(res.data.data);
+    const json = await res.json();
+    if (json.errors) {
+      throw json;
+    }
+    callback(json.data);
+    console.log(json);
   } catch (err) {
     error(err);
+    console.log(err);
   }
 };

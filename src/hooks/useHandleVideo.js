@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const useHandleVideo = () => {
   const [tempImage, setTempImage] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { data } = useLogin();
   const navigate = useNavigate();
   const handleImage = (e) => {
@@ -16,19 +17,16 @@ const useHandleVideo = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const name = e.target[0].value;
     const title = e.target[1].value;
     const description = e.target[2].value;
-    console.log(e.target);
     const form = new FormData();
     form.append("name", name);
     form.append("title", title);
     form.append("description", description);
     form.append("video", e.target[3].files[0]);
-    // console.log(form.getAll("name"));
-    // console.log(form.getAll("title"));
-    // console.log(form.getAll("description"));
-    // console.log(form.getAll("video"));
+
     const config = {
       method: "POST",
       headers: {
@@ -51,6 +49,8 @@ const useHandleVideo = () => {
     } catch (error) {
       console.log(error);
       setError(error);
+    } finally {
+      setIsLoading(true);
     }
   };
   return {
@@ -59,6 +59,7 @@ const useHandleVideo = () => {
     handleImage,
     handleSubmit,
     isLogin: data,
+    isLoading,
   };
 };
 

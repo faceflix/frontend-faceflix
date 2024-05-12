@@ -20,6 +20,7 @@ const EditProfile = () => {
     handleBackground,
     handlePhoto,
     handleSubmit,
+    isLoading,
   } = useHandleEdit();
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
@@ -106,7 +107,7 @@ const EditProfile = () => {
               </div>
             </div>
             <div className="mt-3 flex gap-1">
-              <ButtonCancelAndSave />
+              <ButtonCancelAndSave isDisable={isLoading} />
             </div>
           </div>
         </div>

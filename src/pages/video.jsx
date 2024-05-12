@@ -4,8 +4,9 @@ import ButtonCancelAndSave from "../components/fragments/ButtonCancelAndSave";
 
 import useHandleVideo from "../hooks/useHandleVideo";
 const VideoPost = () => {
-  const { tempImage, error, handleImage, handleSubmit, isLogin } =
+  const { tempImage, error, handleImage, handleSubmit, isLogin, isLoading } =
     useHandleVideo();
+  console.log(tempImage);
   return (
     <BannerPhotoLayouts data={isLogin}>
       <main className="mt-32 px-8">
@@ -64,7 +65,7 @@ const VideoPost = () => {
             </div>
 
             <div className="mt-4 flex justify-end gap-1">
-              <ButtonCancelAndSave isDisable={tempImage ? false : true} />
+              <ButtonCancelAndSave isDisable={!tempImage} />
             </div>
           </div>
         </form>

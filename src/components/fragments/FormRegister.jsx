@@ -6,9 +6,10 @@ const FormRegister = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
+    setIsLogin(true);
     e.preventDefault();
     const user = {
       email,
@@ -41,6 +42,7 @@ const FormRegister = () => {
     } finally {
       setEmail("");
       setPassword("");
+      setIsLogin(false);
     }
   };
 
@@ -49,7 +51,11 @@ const FormRegister = () => {
       <div className="text-center">
         {error ? <p className="text-[13px] text-red-500">{error}</p> : null}
       </div>
-      <Form onSubmit={(e) => handleSubmit(e)} className={"flex flex-col gap-2"}>
+      <Form
+        onSubmit={(e) => handleSubmit(e)}
+        className={"flex flex-col gap-2"}
+        isDisabled={isLogin}
+      >
         <input
           className="rounded-md bg-[#ffeed9] h-10 px-5"
           name="email"
